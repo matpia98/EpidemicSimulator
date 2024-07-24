@@ -12,23 +12,8 @@ class SimulationAdder {
     private final SimulationRepository simulationRepository;
 
     SimulationDto addSimulation(SimulationRequestDto requestDto) {
-        Simulation simulationToSave = Simulation.builder()
-                .populationSize(requestDto.populationSize())
-                .initialInfected(requestDto.initialInfected())
-                .infectionRate(requestDto.infectionRate())
-                .mortalityRate(requestDto.mortalityRate())
-                .infectionDuration(requestDto.infectionDuration())
-                .simulationDuration(requestDto.simulationDuration())
-                .build();
+        Simulation simulationToSave = SimulationMapper.mapFromSimulationRequestDtoToSimulation(requestDto);
         Simulation savedSimulation = simulationRepository.save(simulationToSave);
-        return SimulationDto.builder()
-                .id(savedSimulation.getId())
-                .populationSize(savedSimulation.getPopulationSize())
-                .initialInfected(savedSimulation.getInitialInfected())
-                .infectionRate(savedSimulation.getInfectionRate())
-                .mortalityRate(savedSimulation.getMortalityRate())
-                .infectionDuration(savedSimulation.getInfectionDuration())
-                .simulationDuration(savedSimulation.getSimulationDuration())
-                .build();
+        return SimulationMapper.mapFromSimulationToSimulationDto(savedSimulation);
     }
 }
