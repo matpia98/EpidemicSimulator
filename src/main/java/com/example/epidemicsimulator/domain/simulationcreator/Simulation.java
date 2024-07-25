@@ -25,11 +25,13 @@ class Simulation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String simulationName;
     private int populationSize;
     private int initialInfected;
-    private int infectionRate;
-    private int mortalityRate;
+    private double infectionRate;
+    private double mortalityRate;
     private int infectionDuration;
+    private int deathDuration;
     private int simulationDuration;
 
     @OneToMany(mappedBy = "simulation", cascade = CascadeType.ALL)

@@ -11,11 +11,13 @@ class SimulationControllerMapper {
     static CreateSimulationDto mapFromSimulationDtoToCreateSimulationDto(SimulationDto simulationDto) {
         return CreateSimulationDto.builder()
                 .id(simulationDto.id())
+                .simulationName(simulationDto.simulationName())
                 .populationSize(simulationDto.populationSize())
                 .initialInfected(simulationDto.initialInfected())
                 .infectionRate(simulationDto.infectionRate())
                 .mortalityRate(simulationDto.mortalityRate())
                 .infectionDuration(simulationDto.infectionDuration())
+                .deathDuration(simulationDto.deathDuration())
                 .simulationDuration(simulationDto.simulationDuration())
                 .build();
     }
@@ -27,11 +29,13 @@ class SimulationControllerMapper {
     static GetSimulationResponseDto mapFromSimulationDtotoGetSimulationResponseDto(SimulationDto simulationDto) {
         return GetSimulationResponseDto.builder()
                 .id(simulationDto.id())
+                .simulationName(simulationDto.simulationName())
                 .populationSize(simulationDto.populationSize())
                 .initialInfected(simulationDto.initialInfected())
                 .infectionRate(simulationDto.infectionRate())
                 .mortalityRate(simulationDto.mortalityRate())
                 .infectionDuration(simulationDto.infectionDuration())
+                .deathDuration(simulationDto.deathDuration())
                 .simulationDuration(simulationDto.simulationDuration())
                 .build();
     }

@@ -5,11 +5,13 @@ import lombok.Builder;
 @Builder
 public record GetSimulationResponseDto(
         int id,
+        String simulationName,
         int populationSize,
         int initialInfected,
-        int infectionRate,
-        int mortalityRate,
+        double infectionRate,
+        double mortalityRate,
         int infectionDuration,
+        int deathDuration,
         int simulationDuration
 ) {
 }

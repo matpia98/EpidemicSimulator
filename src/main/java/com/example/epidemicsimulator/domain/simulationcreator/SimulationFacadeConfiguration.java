@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 class SimulationFacadeConfiguration {
 
     @Bean
-    SimulationFacade simulationFacade(SimulationRepository simulationRepository) {
-        SimulationAdder simulationAdder = new SimulationAdder(simulationRepository);
+    SimulationFacade simulationFacade(SimulationRepository simulationRepository, DailyDataRepository dailyDataRepository) {
+        SimulationAdder simulationAdder = new SimulationAdder(simulationRepository, dailyDataRepository);
         SimulationRetriever simulationRetriever = new SimulationRetriever(simulationRepository);
         return new SimulationFacade(simulationAdder, simulationRetriever);
     }
