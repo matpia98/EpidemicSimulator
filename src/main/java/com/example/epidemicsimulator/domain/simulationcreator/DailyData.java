@@ -1,4 +1,4 @@
-package com.example.epidemicsimulator.domain;
+package com.example.epidemicsimulator.domain.simulationcreator;
 
 
 import jakarta.persistence.Entity;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DailyData {
+class DailyData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

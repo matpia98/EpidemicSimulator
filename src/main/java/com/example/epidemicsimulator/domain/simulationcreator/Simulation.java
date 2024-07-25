@@ -1,4 +1,4 @@
-package com.example.epidemicsimulator.domain;
+package com.example.epidemicsimulator.domain.simulationcreator;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

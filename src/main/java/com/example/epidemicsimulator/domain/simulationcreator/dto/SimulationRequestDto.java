@@ -1,10 +1,6 @@
-package com.example.epidemicsimulator.domain.dto;
+package com.example.epidemicsimulator.domain.simulationcreator.dto;
 
-import lombok.Builder;
-
-@Builder
-public record SimulationDto(
-        int id,
+public record SimulationRequestDto(
         int populationSize,
         int initialInfected,
         int infectionRate,

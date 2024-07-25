@@ -1,4 +1,4 @@
-package com.example.epidemicsimulator.domain;
+package com.example.epidemicsimulator.domain.simulationcreator;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
