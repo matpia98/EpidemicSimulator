@@ -19,4 +19,8 @@ public class SimulationFacade {
     public List<SimulationDto> getAllSimulations() {
         return simulationRetriever.findAll();
     }
+
+    public SimulationDto getSimulationById(Long id) {
+        return simulationRetriever.findById(id);
+    }
 }

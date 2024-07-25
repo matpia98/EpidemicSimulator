@@ -23,4 +23,16 @@ class SimulationControllerMapper {
     static GetAllSimulationsResponseDto mapFromSimulationToGetAllSimulationsResponseDto(List<SimulationDto> allSimulations) {
         return new GetAllSimulationsResponseDto(allSimulations);
     }
+
+    static GetSimulationResponseDto mapFromSimulationDtotoGetSimulationResponseDto(SimulationDto simulationDto) {
+        return GetSimulationResponseDto.builder()
+                .id(simulationDto.id())
+                .populationSize(simulationDto.populationSize())
+                .initialInfected(simulationDto.initialInfected())
+                .infectionRate(simulationDto.infectionRate())
+                .mortalityRate(simulationDto.mortalityRate())
+                .infectionDuration(simulationDto.infectionDuration())
+                .simulationDuration(simulationDto.simulationDuration())
+                .build();
+    }
 }

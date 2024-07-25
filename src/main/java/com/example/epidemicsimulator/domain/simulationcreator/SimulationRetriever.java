@@ -19,4 +19,10 @@ class SimulationRetriever {
                 .map(SimulationMapper::mapFromSimulationToSimulationDto)
                 .collect(Collectors.toList());
     }
+
+    SimulationDto findById(Long id) {
+        Simulation simulation = simulationRepository.findById(id)
+                .orElseThrow(() -> new SimulationNotFoundException("Simulation not found"));
+        return SimulationMapper.mapFromSimulationToSimulationDto(simulation);
+    }
 }
