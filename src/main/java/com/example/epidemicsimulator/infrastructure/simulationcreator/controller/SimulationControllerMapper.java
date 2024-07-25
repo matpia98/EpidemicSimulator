@@ -2,8 +2,11 @@ package com.example.epidemicsimulator.infrastructure.simulationcreator.controlle
 
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.CreateSimulationDto;
+import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetAllSimulationsResponseDto;
 
-class SongControllerMapper {
+import java.util.List;
+
+class SimulationControllerMapper {
 
     static CreateSimulationDto mapFromSimulationDtoToCreateSimulationDto(SimulationDto simulationDto) {
         return CreateSimulationDto.builder()
@@ -15,5 +18,9 @@ class SongControllerMapper {
                 .infectionDuration(simulationDto.infectionDuration())
                 .simulationDuration(simulationDto.simulationDuration())
                 .build();
+    }
+
+    static GetAllSimulationsResponseDto mapFromSimulationToGetAllSimulationsResponseDto(List<SimulationDto> allSimulations) {
+        return new GetAllSimulationsResponseDto(allSimulations);
     }
 }
