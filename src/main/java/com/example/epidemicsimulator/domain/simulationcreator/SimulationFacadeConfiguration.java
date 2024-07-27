@@ -10,7 +10,8 @@ class SimulationFacadeConfiguration {
     SimulationFacade simulationFacade(SimulationRepository simulationRepository, DailyDataRepository dailyDataRepository) {
         SimulationAdder simulationAdder = new SimulationAdder(simulationRepository, dailyDataRepository);
         SimulationRetriever simulationRetriever = new SimulationRetriever(simulationRepository);
-        return new SimulationFacade(simulationAdder, simulationRetriever);
+        SimulationUpdater simulationUpdater = new SimulationUpdater(simulationRepository);
+        return new SimulationFacade(simulationAdder, simulationRetriever, simulationUpdater);
     }
 
 }

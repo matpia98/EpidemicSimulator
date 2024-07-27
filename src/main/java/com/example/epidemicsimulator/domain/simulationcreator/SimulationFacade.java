@@ -11,6 +11,7 @@ public class SimulationFacade {
 
     private final SimulationAdder simulationAdder;
     private final SimulationRetriever simulationRetriever;
+    private final SimulationUpdater simulationUpdater;
 
     public SimulationDto addSimulation(SimulationRequestDto requestDto) {
         return simulationAdder.addSimulation(requestDto);
@@ -23,4 +24,9 @@ public class SimulationFacade {
     public SimulationDto getSimulationById(Long id) {
         return simulationRetriever.findById(id);
     }
+
+    public SimulationDto updateSimulation(Long id, SimulationRequestDto requestDto) {
+        return simulationUpdater.updateSimulation(id, requestDto);
+    }
+
 }

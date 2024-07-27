@@ -5,11 +5,14 @@ import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationRequestDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.CreateSimulationDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetAllSimulationsResponseDto;
+import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetSimulationResponseDto;
+import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.UpdateSimulationResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,4 +48,12 @@ class SimulationRestController {
         GetSimulationResponseDto response = mapFromSimulationDtotoGetSimulationResponseDto(simulationById);
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateSimulationResponseDto> updateSimulation(@PathVariable Long id, @RequestBody SimulationRequestDto requestDto) {
+        SimulationDto updatedSimulation = simulationFacade.updateSimulation(id, requestDto);
+        UpdateSimulationResponseDto response = mapFromSimulationDtotoUpdateSimulationResponseDto(updatedSimulation);
+        return ResponseEntity.ok(response);
+    }
+
 }
