@@ -2,6 +2,7 @@ package com.example.epidemicsimulator.domain.simulationcreator;
 
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationRequestDto;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class SimulationFacade {
         return simulationRetriever.findById(id);
     }
 
+    @Transactional
     public SimulationDto updateSimulation(Long id, SimulationRequestDto requestDto) {
         return simulationUpdater.updateSimulation(id, requestDto);
     }

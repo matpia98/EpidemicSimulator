@@ -27,7 +27,7 @@ class SimulationAdder {
         return SimulationMapper.mapFromSimulationToSimulationDto(savedSimulation);
     }
 
-    private List<DailyData> runSimulation(Simulation simulation) {
+    List<DailyData> runSimulation(Simulation simulation) {
         List<DailyData> dailyDataList = new ArrayList<>();
 
         int susceptible = simulation.getPopulationSize() - simulation.getInitialInfected();
