@@ -1,5 +1,6 @@
 package com.example.epidemicsimulator.domain.simulationcreator;
 
+import com.example.epidemicsimulator.domain.simulationcreator.dto.DailyDataDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationRequestDto;
 import jakarta.transaction.Transactional;
@@ -13,6 +14,7 @@ public class SimulationFacade {
     private final SimulationAdder simulationAdder;
     private final SimulationRetriever simulationRetriever;
     private final SimulationUpdater simulationUpdater;
+    private final DailyDataRetriever dailyDataRetriever;
 
     public SimulationDto addSimulation(SimulationRequestDto requestDto) {
         return simulationAdder.addSimulation(requestDto);
@@ -31,4 +33,8 @@ public class SimulationFacade {
         return simulationUpdater.updateSimulation(id, requestDto);
     }
 
+
+    public List<DailyDataDto> findBySimulationId(Long id) {
+        return dailyDataRetriever.findBySimulationId(id);
+    }
 }

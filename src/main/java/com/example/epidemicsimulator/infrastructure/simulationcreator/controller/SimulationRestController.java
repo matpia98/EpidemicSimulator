@@ -4,6 +4,7 @@ import com.example.epidemicsimulator.domain.simulationcreator.SimulationFacade;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationRequestDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.CreateSimulationDto;
+import com.example.epidemicsimulator.domain.simulationcreator.dto.DailyDataDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetAllSimulationsResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetSimulationResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.UpdateSimulationResponseDto;
@@ -55,5 +56,12 @@ class SimulationRestController {
         UpdateSimulationResponseDto response = mapFromSimulationDtotoUpdateSimulationResponseDto(updatedSimulation);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{id}/daily-data")
+    public ResponseEntity<List<DailyDataDto>> getDailyData(@PathVariable Long id) {
+        List<DailyDataDto> dailyDataList = simulationFacade.findBySimulationId(id);
+        return ResponseEntity.ok(dailyDataList);
+    }
+
 
 }
