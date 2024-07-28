@@ -15,6 +15,7 @@ public class SimulationFacade {
     private final SimulationRetriever simulationRetriever;
     private final SimulationUpdater simulationUpdater;
     private final DailyDataRetriever dailyDataRetriever;
+    private final SimulationDeleter simulationDeleter;
 
     public SimulationDto addSimulation(SimulationRequestDto requestDto) {
         return simulationAdder.addSimulation(requestDto);
@@ -36,5 +37,9 @@ public class SimulationFacade {
 
     public List<DailyDataDto> findBySimulationId(Long id) {
         return dailyDataRetriever.findBySimulationId(id);
+    }
+
+    public void deleteSimulationById(Long id) {
+        simulationDeleter.deleteSimulationById(id);
     }
 }

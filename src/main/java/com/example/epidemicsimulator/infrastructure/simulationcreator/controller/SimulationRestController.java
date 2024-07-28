@@ -10,6 +10,7 @@ import com.example.epidemicsimulator.infrastructure.simulationcreator.controller
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.UpdateSimulationResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,13 @@ class SimulationRestController {
     public ResponseEntity<UpdateSimulationResponseDto> updateSimulation(@PathVariable Long id, @RequestBody SimulationRequestDto requestDto) {
         SimulationDto updatedSimulation = simulationFacade.updateSimulation(id, requestDto);
         UpdateSimulationResponseDto response = mapFromSimulationDtotoUpdateSimulationResponseDto(updatedSimulation);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DeleteSimulationResponseDto> deleteSimulation(@PathVariable Long id) {
+        simulationFacade.deleteSimulationById(id);
+        DeleteSimulationResponseDto response = mapFromSimulationToDeleteSimulationResponse(id);
         return ResponseEntity.ok(response);
     }
 

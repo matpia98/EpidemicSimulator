@@ -12,7 +12,8 @@ class SimulationFacadeConfiguration {
         SimulationRetriever simulationRetriever = new SimulationRetriever(simulationRepository);
         SimulationUpdater simulationUpdater = new SimulationUpdater(simulationRepository, dailyDataRepository, simulationAdder);
         DailyDataRetriever dailyDataRetriever = new DailyDataRetriever(dailyDataRepository);
-        return new SimulationFacade(simulationAdder, simulationRetriever, simulationUpdater, dailyDataRetriever);
+        SimulationDeleter simulationDeleter = new SimulationDeleter(simulationRepository);
+        return new SimulationFacade(simulationAdder, simulationRetriever, simulationUpdater, dailyDataRetriever, simulationDeleter);
     }
 
 }

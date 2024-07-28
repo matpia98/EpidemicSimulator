@@ -5,6 +5,7 @@ import com.example.epidemicsimulator.infrastructure.simulationcreator.controller
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetAllSimulationsResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetSimulationResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.UpdateSimulationResponseDto;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -54,5 +55,9 @@ class SimulationControllerMapper {
                 .deathDuration(simulationDto.deathDuration())
                 .simulationDuration(simulationDto.simulationDuration())
                 .build();
+    }
+
+    static DeleteSimulationResponseDto mapFromSimulationToDeleteSimulationResponse(Long id) {
+        return new DeleteSimulationResponseDto("You deleted simulation with id: " + id, HttpStatus.OK);
     }
 }
