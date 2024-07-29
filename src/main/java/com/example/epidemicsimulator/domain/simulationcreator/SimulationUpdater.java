@@ -19,7 +19,6 @@ class SimulationUpdater {
         Simulation simulationToUpdate = simulationRepository.findById(id)
                 .orElseThrow(() -> new SimulationNotFoundException("Simulation with id " + id + " not found"));
 
-        // Update the simulation entity with new values
         simulationToUpdate.setSimulationName(requestDto.simulationName());
         simulationToUpdate.setPopulationSize(requestDto.populationSize());
         simulationToUpdate.setInitialInfected(requestDto.initialInfected());
@@ -29,13 +28,10 @@ class SimulationUpdater {
         simulationToUpdate.setDeathDuration(requestDto.deathDuration());
         simulationToUpdate.setSimulationDuration(requestDto.simulationDuration());
 
-        // Delete existing DailyData records for the simulation
         dailyDataRepository.deleteBySimulationId(simulationToUpdate.getId());
 
-        // Save the updated simulation
         Simulation updatedSimulation = simulationRepository.save(simulationToUpdate);
 
-        // Run the simulation again to create new DailyData records
         List<DailyData> dailyDataList = simulationAdder.runSimulation(updatedSimulation);
         dailyDataRepository.saveAll(dailyDataList);
 

@@ -17,24 +17,29 @@ import java.util.function.Function;
 class InMemorySimulationRepository implements SimulationRepository{
 
     private final Map<Long, Simulation> database = new ConcurrentHashMap<>();
-    private final AtomicLong index = new AtomicLong(1);
+    private final AtomicLong index = new AtomicLong(0);
 
     @Override
     public <S extends Simulation> S save(S entity) {
-        long index = this.index.getAndIncrement();
-        Simulation simulationToSave = new Simulation(
-                index,
-                entity.getSimulationName(),
-                entity.getPopulationSize(),
-                entity.getInitialInfected(),
-                entity.getInfectionRate(),
-                entity.getMortalityRate(),
-                entity.getInfectionDuration(),
-                entity.getDeathDuration(),
-                entity.getSimulationDuration(),
-                entity.getDailyDataList());
-        database.put(simulationToSave.getId(), simulationToSave);
-        return (S) simulationToSave;
+        if (entity.getId() == null) {
+            long newId = index.incrementAndGet();
+            Simulation simulationToSave = new Simulation(
+                    newId,
+                    entity.getSimulationName(),
+                    entity.getPopulationSize(),
+                    entity.getInitialInfected(),
+                    entity.getInfectionRate(),
+                    entity.getMortalityRate(),
+                    entity.getInfectionDuration(),
+                    entity.getDeathDuration(),
+                    entity.getSimulationDuration(),
+                    entity.getDailyDataList());
+            database.put(newId, simulationToSave);
+            return (S) simulationToSave;
+        } else {
+            database.put(entity.getId(), entity);
+            return entity;
+        }
     }
 
     @Override
@@ -45,6 +50,11 @@ class InMemorySimulationRepository implements SimulationRepository{
     @Override
     public List<Simulation> findAll() {
         return new ArrayList<>(database.values());
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+        database.remove(aLong);
     }
 
     @Override
@@ -145,11 +155,6 @@ class InMemorySimulationRepository implements SimulationRepository{
     @Override
     public long count() {
         return 0;
-    }
-
-    @Override
-    public void deleteById(Long aLong) {
-
     }
 
     @Override
