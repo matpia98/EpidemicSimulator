@@ -2,6 +2,7 @@ package com.example.epidemicsimulator.infrastructure.simulationcreator.controlle
 
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.CreateSimulationDto;
+import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.DeleteSimulationResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetAllSimulationsResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetSimulationResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.UpdateSimulationResponseDto;

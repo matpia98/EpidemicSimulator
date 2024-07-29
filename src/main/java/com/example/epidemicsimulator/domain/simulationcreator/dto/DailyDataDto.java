@@ -10,6 +10,6 @@ public record DailyDataDto(
          int susceptible,
          int deceased,
          int recovered,
-         Integer simulationId
+         Long simulationId
 ) {
 }

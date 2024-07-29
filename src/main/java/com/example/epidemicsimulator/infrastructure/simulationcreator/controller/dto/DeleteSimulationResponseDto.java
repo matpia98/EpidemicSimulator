@@ -1,4 +1,4 @@
-package com.example.epidemicsimulator.infrastructure.simulationcreator.controller;
+package com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto;
 
 import org.springframework.http.HttpStatus;
 

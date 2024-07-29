@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record SimulationDto(
-        int id,
+        Long id,
         String simulationName,
         int populationSize,
         int initialInfected,

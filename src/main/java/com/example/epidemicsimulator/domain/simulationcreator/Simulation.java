@@ -24,7 +24,7 @@ class Simulation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String simulationName;
     private int populationSize;
     private int initialInfected;
