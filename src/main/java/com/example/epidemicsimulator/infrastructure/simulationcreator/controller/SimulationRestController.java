@@ -9,6 +9,7 @@ import com.example.epidemicsimulator.infrastructure.simulationcreator.controller
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetAllSimulationsResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.GetSimulationResponseDto;
 import com.example.epidemicsimulator.infrastructure.simulationcreator.controller.dto.UpdateSimulationResponseDto;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,7 +33,7 @@ class SimulationRestController {
     private final SimulationFacade simulationFacade;
 
     @PostMapping
-    public ResponseEntity<CreateSimulationDto> addSimulation(@RequestBody SimulationRequestDto requestDto) {
+    public ResponseEntity<CreateSimulationDto> addSimulation(@RequestBody @Valid SimulationRequestDto requestDto) {
         SimulationDto simulationDto = simulationFacade.addSimulation(requestDto);
         CreateSimulationDto createSimulationDto = mapFromSimulationDtoToCreateSimulationDto(simulationDto);
         return ResponseEntity.ok(createSimulationDto);
@@ -53,7 +54,7 @@ class SimulationRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateSimulationResponseDto> updateSimulation(@PathVariable Long id, @RequestBody SimulationRequestDto requestDto) {
+    public ResponseEntity<UpdateSimulationResponseDto> updateSimulation(@PathVariable Long id, @RequestBody @Valid SimulationRequestDto requestDto) {
         SimulationDto updatedSimulation = simulationFacade.updateSimulation(id, requestDto);
         UpdateSimulationResponseDto response = mapFromSimulationDtotoUpdateSimulationResponseDto(updatedSimulation);
         return ResponseEntity.ok(response);
