@@ -17,7 +17,7 @@ class SimulationUpdater {
 
     SimulationDto updateSimulation(Long id, SimulationRequestDto requestDto) {
         Simulation simulationToUpdate = simulationRepository.findById(id)
-                .orElseThrow(() -> new SimulationNotFoundException("Simulation not found"));
+                .orElseThrow(() -> new SimulationNotFoundException("Simulation with id " + id + " not found"));
 
         // Update the simulation entity with new values
         simulationToUpdate.setSimulationName(requestDto.simulationName());

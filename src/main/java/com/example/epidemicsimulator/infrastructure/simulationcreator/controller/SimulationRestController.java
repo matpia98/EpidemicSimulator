@@ -28,7 +28,7 @@ import static com.example.epidemicsimulator.infrastructure.simulationcreator.con
 @RestController
 @RequestMapping("/api/simulations")
 @AllArgsConstructor
-class SimulationRestController {
+public class SimulationRestController {
 
     private final SimulationFacade simulationFacade;
 

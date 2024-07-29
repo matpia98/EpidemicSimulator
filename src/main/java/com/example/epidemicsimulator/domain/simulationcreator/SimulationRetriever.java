@@ -22,7 +22,7 @@ class SimulationRetriever {
 
     SimulationDto findById(Long id) {
         Simulation simulation = simulationRepository.findById(id)
-                .orElseThrow(() -> new SimulationNotFoundException("Simulation not found"));
+                .orElseThrow(() -> new SimulationNotFoundException("Simulation with id " + id + " not found"));
         return SimulationMapper.mapFromSimulationToSimulationDto(simulation);
     }
 }

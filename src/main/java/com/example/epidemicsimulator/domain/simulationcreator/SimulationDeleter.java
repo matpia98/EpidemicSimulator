@@ -11,7 +11,7 @@ class SimulationDeleter {
 
     void deleteSimulationById(Long id) {
         simulationRepository.findById(id)
-                .orElseThrow(() -> new SimulationNotFoundException("Simulation not found"));
+                .orElseThrow(() -> new SimulationNotFoundException("Simulation with id " + id + " not found"));
         simulationRepository.deleteById(id);
     }
 }
