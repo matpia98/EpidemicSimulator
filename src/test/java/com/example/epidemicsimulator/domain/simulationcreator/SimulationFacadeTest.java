@@ -1,10 +1,12 @@
 package com.example.epidemicsimulator.domain.simulationcreator;
 
+import com.example.epidemicsimulator.domain.simulationcreator.dto.DailyDataDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationDto;
 import com.example.epidemicsimulator.domain.simulationcreator.dto.SimulationRequestDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -189,4 +191,63 @@ class SimulationFacadeTest {
         assertThat(updatedSimulationDto.deathDuration()).isEqualTo(21);
         assertThat(updatedSimulationDto.simulationDuration()).isEqualTo(45);
     }
+
+    @Test
+    public void should_create_correct_daily_data_when_adding_simulation() {
+        // given
+        SimulationFacade simulationFacade = new SimulationFacadeConfiguration().simulationFacade(
+                new InMemorySimulationRepository(),
+                new InMemoryDailyDataRepository());
+
+        SimulationRequestDto simulationRequestDto = new SimulationRequestDto(
+                "covid-19",
+                1000,
+                10,
+                1.5,
+                0.01,
+                10,
+                14,
+                30
+        );
+
+        // when
+        SimulationDto addedSimulation = simulationFacade.addSimulation(simulationRequestDto);
+
+        // then
+        List<DailyDataDto> dailyDataList = simulationFacade.findBySimulationId(addedSimulation.id());
+
+        assertThat(dailyDataList).hasSize(30);
+
+        DailyDataDto firstDay = dailyDataList.get(0);
+        assertThat(firstDay.day()).isEqualTo(1);
+        assertThat(firstDay.infected()).isEqualTo(25);
+        assertThat(firstDay.susceptible()).isEqualTo(975);
+        assertThat(firstDay.deceased()).isEqualTo(0);
+        assertThat(firstDay.recovered()).isEqualTo(0);
+
+        DailyDataDto lastDay = dailyDataList.get(29);
+        assertThat(lastDay.day()).isEqualTo(30);
+
+        assertThat(dailyDataList).allSatisfy(dailyData -> {
+            assertThat(dailyData.infected()).isGreaterThanOrEqualTo(0);
+            assertThat(dailyData.susceptible()).isGreaterThanOrEqualTo(0);
+            assertThat(dailyData.deceased()).isGreaterThanOrEqualTo(0);
+            assertThat(dailyData.recovered()).isGreaterThanOrEqualTo(0);
+            assertThat(dailyData.infected() + dailyData.susceptible() + dailyData.deceased() + dailyData.recovered())
+                    .isEqualTo(1000);
+        });
+
+        IntStream.range(1, dailyDataList.size())
+                .forEach(i -> {
+                    DailyDataDto prev = dailyDataList.get(i - 1);
+                    DailyDataDto curr = dailyDataList.get(i);
+                    assertThat(curr.deceased()).isGreaterThanOrEqualTo(prev.deceased());
+                    assertThat(curr.recovered()).isGreaterThanOrEqualTo(prev.recovered());
+                    assertThat(curr.susceptible()).isLessThanOrEqualTo(prev.susceptible());
+                    assertThat(curr.deceased()).isGreaterThanOrEqualTo(prev.deceased());
+                });
+
+
+    }
+
 }
